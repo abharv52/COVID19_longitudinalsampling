@@ -85,7 +85,7 @@ zip_plot <- ggplot(Weekly_pos,aes(x=Collection.date,y=Percent))+geom_point(data=
   xlab("Date") +
   geom_hline(yintercept=0)+
   scale_y_continuous(name="Percent Positive",
-                     limits=c(-10,xmax),
+                     limits=c(-20,xmax),
                      breaks=c(0,10,20,30,40,50,60),
                      sec.axis=sec_axis(~.*coeff,name="New Cases",
                                        breaks=c(0,1,2,3,4)))+
