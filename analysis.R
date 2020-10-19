@@ -22,8 +22,8 @@ Weekly_pos <- samples %>%
             # calculating 95% CI
             prop=n_pos/n,
             se=sqrt((prop*(1-prop))/n),
-            t95=qt(.95,n-1),
-            error=se*t95*100)
+            t90=qt(.90,n-1),
+            error=se*t90*100)
 
 # Calculating 7-day moving average for case numbers
 covidcases_zip$movingavg7 <- rollmean(covidcases_zip$Total.cases,7,align="center",fill=NA)
@@ -50,7 +50,7 @@ city_plot <- ggplot(Weekly_pos,aes(x=Collection.date,y=Percent))+geom_point(data
   xlab("Date") +
   geom_hline(yintercept=0)+
   scale_y_continuous(name="Percent Positive",
-                     limits=c(-20,xmax1),
+                     limits=c(-10,xmax1),
                      breaks=c(0,10,20,30,40,50,60),
                      sec.axis=sec_axis(~.*coeff1,name="New Cases",
                                        breaks=c(0,5,10,15,20,25)))+
@@ -85,7 +85,7 @@ zip_plot <- ggplot(Weekly_pos,aes(x=Collection.date,y=Percent))+geom_point(data=
   xlab("Date") +
   geom_hline(yintercept=0)+
   scale_y_continuous(name="Percent Positive",
-                     limits=c(-20,xmax),
+                     limits=c(-10,xmax),
                      breaks=c(0,10,20,30,40,50,60),
                      sec.axis=sec_axis(~.*coeff,name="New Cases",
                                        breaks=c(0,1,2,3,4)))+
