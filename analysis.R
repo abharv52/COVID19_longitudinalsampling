@@ -10,6 +10,8 @@ covidcases_zip <- readRDS("covid_cases_Zip.rds") #cases only in zip of sampling
 
 # load in required packages
 library(dplyr)
+library(zoo)
+library(ggplot2)
 
 # Summarizing sample data by week
 Weekly_pos <- samples %>%
@@ -38,21 +40,17 @@ city_plot <- ggplot(Weekly_pos,aes(x=Collection.date,y=Percent))+geom_point(data
                 position=position_dodge(.9)) +
   # Adding mask order info
   geom_vline(xintercept=as.Date("2020-05-06"),linetype = "dashed")+
-  geom_text(aes(label="Mask Order",x=as.Date("2020-05-06"),y=58,vjust=-1.5,hjust=-.2),angle=45,size=4)+
   # Adding shutdown info
   geom_vline(xintercept=as.Date("2020-03-24"),linetype = "dashed")+
-  geom_text(aes(label="Safer-at-Home Advisory",x=as.Date("2020-03-24"),y=58,vjust=-0.8,hjust=-.2),angle=45,size=4)+
   # Phase 1 reopening
   geom_vline(xintercept=as.Date("2020-05-18"),linetype = "dashed")+
-  geom_text(aes(label="Phase 1 Reopening",x=as.Date("2020-05-18"),y=58,vjust=-0.8,hjust=-.2),angle=45,size=4)+
   # Phase 2 reopening
   geom_vline(xintercept=as.Date("2020-06-08"),linetype = "dashed")+
-  geom_text(aes(label="Phase 2 Reopening",x=as.Date("2020-06-08"),y=58,vjust=-0.8,hjust=-.2),angle=45,size=4)+
   theme_minimal(base_size=25) +
   xlab("Date") +
   geom_hline(yintercept=0)+
   scale_y_continuous(name="Percent Positive",
-                     limits=c(-10,xmax1),
+                     limits=c(-20,xmax1),
                      breaks=c(0,10,20,30,40,50,60),
                      sec.axis=sec_axis(~.*coeff1,name="New Cases",
                                        breaks=c(0,5,10,15,20,25)))+
@@ -77,16 +75,12 @@ zip_plot <- ggplot(Weekly_pos,aes(x=Collection.date,y=Percent))+geom_point(data=
                 position=position_dodge(.9)) +
   # Adding mask order info
   geom_vline(xintercept=as.Date("2020-05-06"),linetype = "dashed")+
-  geom_text(aes(label="Mask Order",x=as.Date("2020-05-06"),y=58,vjust=-1,hjust=-.2),angle=45,size=4)+
   # Adding shutdown info
   geom_vline(xintercept=as.Date("2020-03-24"),linetype = "dashed")+
-  geom_text(aes(label="Safer-at-Home Advisory",x=as.Date("2020-03-24"),y=58,vjust=-0.8,hjust=-.2),angle=45,size=4)+
   # Phase 1 reopening
   geom_vline(xintercept=as.Date("2020-05-18"),linetype = "dashed")+
-  geom_text(aes(label="Phase 1 Reopening",x=as.Date("2020-05-18"),y=58,vjust=-0.8,hjust=-.2),angle=45,size=4)+
   # Phase 2 reopening
   geom_vline(xintercept=as.Date("2020-06-08"),linetype = "dashed")+
-  geom_text(aes(label="Phase 2 Reopening",x=as.Date("2020-06-08"),y=58,vjust=-0.8,hjust=-.2),angle=45,size=4)+
   theme_minimal(base_size=25) +
   xlab("Date") +
   geom_hline(yintercept=0)+
