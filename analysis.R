@@ -34,7 +34,8 @@ covidcases_city$movingavg7 <- rollmean(covidcases_city$Total.cases,7,align="cent
 xmax1=60
 coeff1=25/xmax1 # Coefficient for plotting with 2 axes
 
-city_plot <- ggplot(Weekly_pos,aes(x=Collection.date,y=Percent))+geom_point(data=covidcases_city,aes(x=Date,y=movingavg7/coeff1),color="red",size=3)+
+city_plot <- ggplot(Weekly_pos,aes(x=Collection.date,y=Percent))+
+  geom_point(data=covidcases_city,aes(x=Date,y=movingavg7/coeff1),color="red",size=3)+
   geom_point(size=4) +
   geom_errorbar(aes(ymin=Percent-error, ymax=Percent+error), width=.8,
                 position=position_dodge(.9)) +
@@ -61,7 +62,7 @@ city_plot <- ggplot(Weekly_pos,aes(x=Collection.date,y=Percent))+geom_point(data
         axis.text.y.right = element_text(color="red",size=15),
         axis.title.y.right=element_text(color="red",size=15),
         panel.border = element_rect(colour = "black", fill=NA, size=1),
-        plot.margin=unit(c(1.5,.1,.1,.1),units="in"))+
+        plot.margin=unit(c(.1,.1,.1,.1),units="in"))+
   xlim(as.Date("2020-03-04"),as.Date("2020-06-30"))
 
 
@@ -69,7 +70,8 @@ city_plot <- ggplot(Weekly_pos,aes(x=Collection.date,y=Percent))+geom_point(data
 xmax=60
 coeff=4/xmax
 
-zip_plot <- ggplot(Weekly_pos,aes(x=Collection.date,y=Percent))+geom_point(data=covidcases_zip,aes(x=Date,y=movingavg7/coeff),color="red",size=3)+
+zip_plot <- ggplot(Weekly_pos,aes(x=Collection.date,y=Percent))+
+  geom_point(data=covidcases_zip,aes(x=Date,y=movingavg7/coeff),color="red",size=3)+
   geom_point(size=4) +
   geom_errorbar(aes(ymin=Percent-error, ymax=Percent+error), width=.8,
                 position=position_dodge(.9)) +
@@ -97,5 +99,5 @@ zip_plot <- ggplot(Weekly_pos,aes(x=Collection.date,y=Percent))+geom_point(data=
         axis.text.y.right = element_text(color="red",size=15),
         axis.title.y.right=element_text(color="red",size=15),
         panel.border = element_rect(colour = "black", fill=NA, size=1),
-        plot.margin=unit(c(1.5,.1,.1,.1),units="in"))+
+        plot.margin=unit(c(.1,.1,.1,.1),units="in"))+
   xlim(as.Date("2020-03-04"),as.Date("2020-06-30"))
